@@ -1,0 +1,64 @@
+<div class="container py-3 p-2">
+    <div class="row my-3">
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+                <h1>Gujarat State Election - 2024</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi iure rerum, explicabo facere perferendis consequuntur ipsum debitis maxime? Officia sequi autem id assumenda voluptatum esse!</p>
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h4>Election is live</h4>
+            <div class="vote-now-button py-3" (click)="openModal($event, modalContent)">
+                Vote Now
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+                <h1>Gujarat State Election - 2024</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi iure rerum, explicabo facere perferendis consequuntur ipsum debitis maxime? Officia sequi autem id assumenda voluptatum esse!</p>
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h4>Election is live</h4>
+            <div class="vote-now-button py-3" (click)="openModal($event, modalContent)">
+                Vote Now
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+                <h1>Gujarat State Election - 2024</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi iure rerum, explicabo facere perferendis consequuntur ipsum debitis maxime? Officia sequi autem id assumenda voluptatum esse!</p>
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h4>Election Starts in</h4>
+            <div class="vote-now-button py-3">
+               3days 11hours
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+                <h1>Gujarat State Election - 2024</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi iure rerum, explicabo facere perferendis consequuntur ipsum debitis maxime? Officia sequi autem id assumenda voluptatum esse!</p>
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h4>Election Starts in</h4>
+            <div class="vote-now-button py-3">
+               5days 18hours
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #modalContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">State Election Details</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+       
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');">Save</button>
+    </div>
+</ng-template>
