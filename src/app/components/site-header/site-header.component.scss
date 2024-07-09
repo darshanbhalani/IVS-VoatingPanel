@@ -1,13 +1,18 @@
 .main-container{
-    height: 20vh;
+    .container{
+        max-height: 150px;
+        min-height: 70px;
+        height: 20vw;
+    }
 
     .header-image{
-        max-height: 15vh;
-        height: 0.2 rem;
+        max-height: 110px;
+        min-height: 50px;
+        height: 15vw;
     }
 
     .header-text{
-        font-size: 0.3 rem;
+        font-size: 0.2 rem;
         font-weight: bolder;
     }
 }
