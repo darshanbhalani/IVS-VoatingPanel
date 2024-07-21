@@ -1,4 +1,4 @@
-.row{
+.row-container{
     border: 2px solid #006989;
     background-color: white;
     min-height: 400px;
@@ -22,3 +22,41 @@
 }
 
 }
+
+.input-box{
+    width: 100%;
+    padding: 8px;
+  }
+
+.input-box-submit{
+    background-color: #006989;
+    color: white;
+    padding: 8px;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 10px;
+
+    input {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+  }
+  
+  .otp-box-submit{
+    width: 22rem;
+    padding: 8px;
+    background-color: #006989;
+    color: white;
+    padding: 8px;
+  }

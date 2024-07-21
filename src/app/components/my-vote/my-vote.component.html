@@ -1,38 +1,47 @@
 <div class="container py-3 p-2">
-    <div class="row my-3">
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-                <h1>Gujarat State Election - 2024</h1>
-                <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5 attempts to vote online, ensuring a secure and accessible voting process for all</p>
+    <div class="row row-container my-3">
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h1>Gujarat State Election - 2024</h1>
+            <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
+                attempts to vote online, ensuring a secure and accessible voting process for all</p>
 
-            </div>
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+        </div>
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
             <h4>Election is live</h4>
             <div class="vote-now-button py-3" (click)="openModal($event, modalContent)">
                 Vote Now
             </div>
         </div>
     </div>
-    <div class="row my-3">
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-                <h1>Delhi State Election - 2024</h1>
-                <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5 attempts to vote online, ensuring a secure and accessible voting process for all</p>
-            </div>
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+    <div class="row row-container my-3">
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h1>Delhi State Election - 2024</h1>
+            <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
+                attempts to vote online, ensuring a secure and accessible voting process for all</p>
+        </div>
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
             <h4>Election is live</h4>
             <div class="vote-now-button py-3" (click)="openModal($event, modalContent)">
                 Vote Now
             </div>
         </div>
     </div>
-    <div class="row my-3">
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-                <h1>Rajastan State Election - 2024</h1>
-                <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5 attempts to vote online, ensuring a secure and accessible voting process for all</p>
-            </div>
-        <div class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+    <div class="row row-container my-3">
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
+            <h1>Rajastan State Election - 2024</h1>
+            <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
+                attempts to vote online, ensuring a secure and accessible voting process for all</p>
+        </div>
+        <div
+            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
             <h4>Election Starts in</h4>
             <div class="vote-now-button py-3">
-               3days 11hours
+                3days 11hours
             </div>
         </div>
     </div>
@@ -45,11 +54,79 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-       
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click');">Save</button>
+        @if(!isOtpSended && !isVoterVerified && !isVoted){
+        <form class="k-form k-form-md" [formGroup]="form">
+            <div class="row">
+                <div class="col-4">
+                    <img src="../../../assets/image3.png" height="250px" width="250px">
+                </div>
+                <div class="col">
+                    <h5 class="text-center">We are verify you before getting started.</h5>
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <label>Candidate Voter-Id</label>
+                            <input type="text" class="input-box">
+                        </div>
+                        <div class="col-12 mt-1">
+                            <label>Candidate Phone Number</label>
+                            <input type="number" class="input-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-danger text-center mt-2">Warnning : Voters have only 5 attemps to send OTP.</div>
+            <input class="input-box-submit input-box mt-5" value="Send OTP" type="submit" (click)="sendOTP($event)">
+        </form>
+        }@else if (isOtpSended && !isVoterVerified  && !isVoted) {
+        <div class="row">
+            <div class="col-4">
+                <img src="../../../assets/image4.png" height="250px" width="250px">
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center align-items-center flex-column" style="height: 250px;">
+                    <h6 class="text-center">OTP successfully sent to your phone number +91 9909343073.</h6>
+                    <div class="otp-inputs pt-2">
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 1)"
+                            #otpInput1 autofocus>
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 2)"
+                            #otpInput2>
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 3)"
+                            #otpInput3>
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 4)"
+                            #otpInput4>
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 5)"
+                            #otpInput5>
+                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 6)"
+                            #otpInput6>
+                    </div>
+                    <input class="otp-box-submit mt-5" value="Verify OTP" type="submit" (click)="verifyOTP($event)">
+                </div>
+            </div>
+        </div>
+        }@else if (isOtpSended && isVoterVerified  && !isVoted) {
+            <div class="container-fluid">
+                <div>Voter Name: <b>Darshan Milanbhai Bhalani</b></div>
+                <div class="text-center pt-3">
+                  <h5>Vote In Junagadh Assembly (Junagadh)</h5>
+                </div>
+                <kendo-grid class="pt-2" [kendoGridBinding]="data" [pageSize]="20" [pageable]="false" [height]="380" [sortable]="true" [groupable]="false" [reorderable]="true" [resizable]="false">
+                  <kendo-grid-column title="Candidates" [width]="70">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      <img [src]="'data:image/jpeg;base64,' + dataItem.profileUrl" alt="Party Logo" style="max-width: 35px; max-height: 35px;">
+                      <span>&nbsp;&nbsp;{{dataItem.name}}</span>
+                    </ng-template>
+                  </kendo-grid-column>
+                  <kendo-grid-column [width]="25">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      <button class="btn text-center" [ngClass]="{'btn-outline-primary': selectedCandidateId != dataItem.id, 'btn-danger': selectedCandidateId === dataItem.id}" style="width: 10rem;" (click)="selectCandidate(dataItem.id)">Vote</button>
+                    </ng-template>
+                  </kendo-grid-column>
+                </kendo-grid>
+                <input class="input-box-submit input-box mt-5" value="Submit Your Vote" type="submit" (click)="recordVote($event)">
+              </div>
+        }@else if (isOtpSended && isVoterVerified  && isVoted) {
+            <div class="text-center"><h3>Thank you for voting</h3></div>
+            <div class="text-center">Your vote successfully recorded.</div>
+        }
     </div>
 </ng-template>
-
-
