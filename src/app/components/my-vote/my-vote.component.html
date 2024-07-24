@@ -1,24 +1,9 @@
 <div class="container py-3 p-2">
+    @for(i of electionList$ | async; track i){
     <div class="row row-container my-3">
         <div
             class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-            <h1>Gujarat State Election - 2024</h1>
-            <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
-                attempts to vote online, ensuring a secure and accessible voting process for all</p>
-
-        </div>
-        <div
-            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-            <h4>Election is live</h4>
-            <div class="vote-now-button py-3" (click)="openModal($event, modalContent)">
-                Vote Now
-            </div>
-        </div>
-    </div>
-    <div class="row row-container my-3">
-        <div
-            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-            <h1>Delhi State Election - 2024</h1>
+            <h1>{{i.stateName}} State Election - {{i.electionDate.split('-')[0]}}</h1>
             <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
                 attempts to vote online, ensuring a secure and accessible voting process for all</p>
         </div>
@@ -30,21 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row row-container my-3">
-        <div
-            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-            <h1>Rajastan State Election - 2024</h1>
-            <p>Voters can cast their votes from 8:00 AM to 5:00 PM with Voter-Id and register phone number.Voters have 5
-                attempts to vote online, ensuring a secure and accessible voting process for all</p>
-        </div>
-        <div
-            class="col-md-6 col-xl-6 col-sm-12 d-flex justify-content-center align-items-center flex-column text-center">
-            <h4>Election Starts in</h4>
-            <div class="vote-now-button py-3">
-                3days 11hours
-            </div>
-        </div>
-    </div>
+}
 </div>
 
 
@@ -65,11 +36,11 @@
                     <div class="row pt-2">
                         <div class="col-12">
                             <label>Candidate Voter-Id</label>
-                            <input type="text" class="input-box">
+                            <input type="text" class="input-box" [pattern]="'[a-zA-Z0-9]{10}'" formControlName="voterId">
                         </div>
                         <div class="col-12 mt-1">
                             <label>Candidate Phone Number</label>
-                            <input type="number" class="input-box">
+                            <input type="number" class="input-box" pattern="[0-9]{10}" formControlName="voterPhoneNumber">
                         </div>
                     </div>
                 </div>
