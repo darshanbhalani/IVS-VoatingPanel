@@ -21,4 +21,21 @@ export class VotingService {
         }
     });
   }
+
+  validateVoter(data:any){
+    return this.http.post(`${environment.apiBaseUrl}/MyVote/ValidateVoter`,data);
+  }
+
+  verifyVoter(data:any){
+    return this.http.post(`${environment.apiBaseUrl}/MyVote/VerifyVoter`,data);
+  }
+
+  registerVote(data:any){
+    return this.http.post(`${environment.apiBaseUrl}/MyVote/Vote`,data);
+  }
+
+  getCandidates(electionId:any,assemblyId:any){
+    return this.http.get(`${environment.apiBaseUrl}/MyVote/GetCandidates?assemblyId=${assemblyId}&electionId=${electionId}`);
+  }
+
 }
