@@ -1,16 +1,28 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, ɵConsole } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimerService } from '../../services/timer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, PatternValidator } from '@angular/forms';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { VotingService } from '../../services/voting/voting.service';
 import { HttpClient } from '@angular/common/http';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { SwitchModule, InputsModule } from '@progress/kendo-angular-inputs';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { ButtonModule } from '@progress/kendo-angular-buttons';
 
 @Component({
   selector: 'app-my-vote',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,GridModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    GridModule,
+    LabelModule,
+    ButtonModule,
+    InputsModule
+  ],
   templateUrl: './my-vote.component.html',
   styleUrl: './my-vote.component.scss'
 })
@@ -28,12 +40,25 @@ export class MyVoteComponent {
   isOtpSended = false;
   isVoterVerified = false;
   isVoted=false;
+  error:any; 
+  otp:any; 
   selectedCandidateId:any;
   
-  public form: FormGroup = new FormGroup({
+  public form1: FormGroup = new FormGroup({
     voterId: new FormControl(null, [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
     voterPhoneNumber: new FormControl(null, [Validators.required,Validators.minLength(10),Validators.maxLength(10)]),
   });
+
+  public form2: FormGroup = new FormGroup({
+    otp1: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+    otp2: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+    otp3: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+    otp4: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+    otp5: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+    otp6: new FormControl(null, [Validators.required, Validators.minLength(1),Validators.maxLength(1)]),
+  });
+
+
 
   constructor(
     private modalService: NgbModal,
@@ -52,12 +77,40 @@ export class MyVoteComponent {
 
   sendOTP(event:any){
     event.preventDefault();
-    this.isOtpSended=true;
+    if(this.form1.valid){
+      const data={
+        VoterId:this.form1.get('voterId')?.value!,
+        VoterPhoneNumber:Number(this.form1.get('voterPhoneNumber')?.value!),
+        ElectionId:1
+      };
+      this.votingService.validateVoter(data).subscribe((response:any) => {
+        if(response.success){
+            this.isOtpSended=true;
+        }else{
+          this.error = response.body.error;
+        }
+      });
+    }
   }
 
   verifyOTP(event:any){
     event.preventDefault();
-    this.isVoterVerified=true;
+    if(this.form2.valid){
+      const data={
+        VoterId:this.form1.get('voterId')?.value!,
+        VoterPhoneNumber:Number(this.form1.get('voterPhoneNumber')?.value!),
+        ElectionId:1,
+        Otp:this.otp
+      };
+      console.log(data)
+      this.votingService.verifyVoter(data).subscribe((response:any) => {
+        if(response.success){
+          this.isVoterVerified=true;
+        }else{
+          this.error = response.body.error;
+        }
+      });
+    }
   }
 
   recordVote(event:any){
@@ -75,7 +128,7 @@ export class MyVoteComponent {
       nextInput.focus();
     }
 
-    if (position === 6 && event.target.value) {
+   
       const otpValue = [
         this.otpInput1.nativeElement.value,
         this.otpInput2.nativeElement.value,
@@ -84,8 +137,6 @@ export class MyVoteComponent {
         this.otpInput5.nativeElement.value,
         this.otpInput6.nativeElement.value
       ].join('');
-
-      console.log('Entered OTP:', otpValue);
-    }
+      alert(otpValue);
   }
 }

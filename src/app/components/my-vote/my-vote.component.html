@@ -26,7 +26,7 @@
     </div>
     <div class="modal-body">
         @if(!isOtpSended && !isVoterVerified && !isVoted){
-        <form class="k-form k-form-md" [formGroup]="form">
+        <form class="k-form k-form-md" [formGroup]="form1">
             <div class="row">
                 <div class="col-4">
                     <img src="../../../assets/image3.png" height="250px" width="250px">
@@ -35,18 +35,23 @@
                     <h5 class="text-center">We are verify you before getting started.</h5>
                     <div class="row pt-2">
                         <div class="col-12">
-                            <label>Candidate Voter-Id</label>
-                            <input type="text" class="input-box" [pattern]="'[a-zA-Z0-9]{10}'" formControlName="voterId">
+                            <kendo-label text="Candidate Voter-Id" formControlName="voterId"></kendo-label>
+                            <kendo-textbox class="pt-1" style="padding:5px;" formControlName="voterId" [clearButton]="true"  [maxlength]="10"
+                                required>
+                            </kendo-textbox>
                         </div>
                         <div class="col-12 mt-1">
-                            <label>Candidate Phone Number</label>
-                            <input type="number" class="input-box" pattern="[0-9]{10}" formControlName="voterPhoneNumber">
+                            <kendo-label text="Candidate Phone Number" formControlName="voterPhoneNumber"></kendo-label>
+                            <kendo-textbox class="pt-1" style="padding:5px;" formControlName="voterPhoneNumber" [clearButton]="true"  [maxlength]="10"
+                            required>
+                        </kendo-textbox>
                         </div>
+                        <div class="text-danger text-center mt-2">Warnning : Voters have only 5 attemps to send OTP.</div>
                     </div>
                 </div>
             </div>
-            <div class="text-danger text-center mt-2">Warnning : Voters have only 5 attemps to send OTP.</div>
-            <input class="input-box-submit input-box mt-5" value="Send OTP" type="submit" (click)="sendOTP($event)">
+            <div class="text-center text-danger mt-2">{{error}}</div>
+            <input class="input-box-submit input-box mt-3" value="Send OTP" type="submit" (click)="sendOTP($event)">
         </form>
         }@else if (isOtpSended && !isVoterVerified  && !isVoted) {
         <div class="row">
@@ -56,21 +61,24 @@
             <div class="col">
                 <div class="d-flex justify-content-center align-items-center flex-column" style="height: 250px;">
                     <h6 class="text-center">OTP successfully sent to your phone number +91 9909343073.</h6>
+                    <form class="k-form k-form-md" [formGroup]="form2">
                     <div class="otp-inputs pt-2">
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 1)"
+                        <input type="text" class="form-control text-center" formControlName="otp1" maxlength="1" (onValueChange)="onKeyUp($event, 1)"
                             #otpInput1 autofocus>
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 2)"
+                        <input type="text" class="form-control text-center" formControlName="otp2" maxlength="1" (onValueChange)="onKeyUp($event, 2)"
                             #otpInput2>
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 3)"
+                        <input type="text" class="form-control text-center" formControlName="otp3" maxlength="1" (onValueChange)="onKeyUp($event, 3)"
                             #otpInput3>
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 4)"
+                        <input type="text" class="form-control text-center" formControlName="otp4" maxlength="1" (onValueChange)="onKeyUp($event, 4)"
                             #otpInput4>
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 5)"
+                        <input type="text" class="form-control text-center" formControlName="otp5" maxlength="1" (onValueChange)="onKeyUp($event, 5)"
                             #otpInput5>
-                        <input type="text" class="form-control text-center" maxlength="1" (keyup)="onKeyUp($event, 6)"
+                        <input type="text" class="form-control text-center" formControlName="otp6" maxlength="1" (onValueChange)="onKeyUp($event, 6)"
                             #otpInput6>
                     </div>
-                    <input class="otp-box-submit mt-5" value="Verify OTP" type="submit" (click)="verifyOTP($event)">
+                    </form>
+                    <div class="text-center text-danger mt-2">{{error}}</div>
+                    <input class="otp-box-submit mt-3" value="Verify OTP" type="submit" (click)="verifyOTP($event)">
                 </div>
             </div>
         </div>
@@ -93,7 +101,8 @@
                     </ng-template>
                   </kendo-grid-column>
                 </kendo-grid>
-                <input class="input-box-submit input-box mt-5" value="Submit Your Vote" type="submit" (click)="recordVote($event)">
+                <div class="text-center text-danger mt-2">{{error}}</div>
+                <input class="input-box-submit input-box mt-3" value="Submit Your Vote" type="submit" (click)="recordVote($event)">
               </div>
         }@else if (isOtpSended && isVoterVerified  && isVoted) {
             <div class="text-center"><h3>Thank you for voting</h3></div>
